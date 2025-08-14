@@ -9,7 +9,7 @@ import numpy as np
 import torch
 from lightning import LightningDataModule
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, FunctionTransformer
 from torch.utils.data import DataLoader, TensorDataset
 
 from .utils import collate_fn_tensordataset
@@ -153,11 +153,11 @@ class ToyHeteroscedasticDatamodule(LightningDataModule):
 
         # Fit scalers on train data
         scalers = dict(
-            X=StandardScaler().fit(self.X_train), Y=StandardScaler().fit(self.Y_train)
+            X=FunctionTransformer().fit(self.X_train), Y=StandardScaler().fit(self.Y_train)
         )
 
         # Apply scaling to all splits, convert to torch tensors
-        for xy in ["X", "Y"]:
+        for xy in ["X","Y"]:
             for arr_type in ["train", "test", "val", "gtext", "calib", "all"]:
                 arr_name = f"{xy}_{arr_type}"
                 setattr(

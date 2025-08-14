@@ -10,6 +10,10 @@ from .toy_image_classification import ToyImageClassificationDataset
 from .toy_image_regression import ToyImageRegressionDataset
 from .toy_image_segmentation import ToySegmentationDataset
 from .toy_pixelwise_regression import ToyPixelWiseRegressionDataset
+from .uci import UCIRegressionDataset
+from .uci_concrete import UCIConcrete
+from .uci_energy import UCIEnergy
+from .uci_yacht import UCIYacht
 
 __all__ = (
     # Toy Image dataset
@@ -24,4 +28,9 @@ __all__ = (
     "ToyPixelWiseRegressionDataset",
     # Toy Donut dataset
     "ToyDonut",
+    #UCI
+    "UCIRegressionDataset",
+    "UCIEnergy",
+    "UCIConcrete",
+    "UCIYacht",
 )
