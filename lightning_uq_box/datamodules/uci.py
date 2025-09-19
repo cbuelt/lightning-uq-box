@@ -24,8 +24,9 @@ class UCIRegressionDatamodule(LightningDataModule):
         seed: int = 0,
         calibration_set: bool = False,
         batch_size: int = 32,
+        eval_batch_size: int = 512,
         num_workers: int = 0,
-        train_distortion:float = 0.0,
+        train_distortion:float = None,
     ) -> None:
         """Initialize a new instance of the Datamodule.
 
@@ -47,6 +48,7 @@ class UCIRegressionDatamodule(LightningDataModule):
         self.seed = seed
         self.calibration_set = calibration_set
         self.batch_size = batch_size
+        self.eval_batch_size = eval_batch_size
         self.num_workers = num_workers
         self.train_distortion = train_distortion
         self.uci_ds = self.initialize_dataset()
@@ -87,7 +89,7 @@ class UCIRegressionDatamodule(LightningDataModule):
         """Return a dataloader for the testing set."""
         return DataLoader(
             self.uci_ds.test_dataset(),
-            batch_size=self.batch_size,
+            batch_size=self.eval_batch_size,
             num_workers=self.num_workers,
         )
 

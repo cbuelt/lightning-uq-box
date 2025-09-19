@@ -43,7 +43,7 @@ class UCIRegressionDataset:
         train_size: float = 0.9,
         seed: int = 0,
         calibration_set: bool = False,
-        train_distortion: float = 0.0,
+        train_distortion: float = None,
     ) -> None:
         """Initiate a new instance of UCI Regression Dataset.
 
@@ -95,7 +95,7 @@ class UCIRegressionDataset:
         self.target_scaler.fit(y)
         self.y_train = self.target_scaler.transform(y_train)
 
-        if train_distortion > 0:
+        if train_distortion is not None:
             self.y_train += np.random.normal(size = y_train.shape) * train_distortion
 
         if calibration_set:
